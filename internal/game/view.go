@@ -1,7 +1,6 @@
 package game
 
 import (
-	"github.com/nsf/termbox-go"
 	tb "github.com/nsf/termbox-go"
 )
 
@@ -59,24 +58,24 @@ func (view *view) render(model *model) {
 	tb.Flush()
 }
 
-func parseColor(colorName string) (color termbox.Attribute) {
+func parseColor(colorName string) (color tb.Attribute) {
 	switch colorName {
 	case "green":
-		color = termbox.ColorGreen
+		color = tb.ColorGreen
 	case "blue":
-		color = termbox.ColorBlue
+		color = tb.ColorBlue
 	case "red":
-		color = termbox.ColorRed
+		color = tb.ColorRed
 	case "cyan":
-		color = termbox.ColorCyan
+		color = tb.ColorCyan
 	case "magenta":
-		color = termbox.ColorMagenta
+		color = tb.ColorMagenta
 	case "yellow":
-		color = termbox.ColorYellow
+		color = tb.ColorYellow
 	case "white":
-		color = termbox.ColorWhite
+		color = tb.ColorWhite
 	case "black":
-		color = termbox.ColorBlack
+		color = tb.ColorBlack
 	default:
 		panic("invalid color")
 	}

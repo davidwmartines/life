@@ -10,10 +10,10 @@ import (
 
 const cellRune = ' '
 
-const size = 100
-const centerFactor = 4
-
 const backgroundColor = tb.ColorBlack
+const centerFactor = 3
+
+var width, height int
 
 var cells map[*grid.Point]*cell
 var gr grid.Grid
@@ -26,6 +26,8 @@ func Start(seed seeds.Seed, generations int, speed int, color tb.Attribute) {
 		panic(err)
 	}
 	defer tb.Close()
+
+	width, height = tb.Size()
 
 	initGrid()
 
@@ -41,8 +43,9 @@ func Start(seed seeds.Seed, generations int, speed int, color tb.Attribute) {
 }
 
 func initGrid() {
+
 	cells = make(map[*grid.Point]*cell)
-	gr = grid.Create(size, size)
+	gr = grid.Create(height, width)
 	for _, row := range gr {
 		for _, point := range row {
 			cell := cell{point, false, false}
@@ -53,7 +56,7 @@ func initGrid() {
 
 func applySeed(seed seeds.Seed) {
 	for _, pair := range seed {
-		seedAlive(pair[0]+(size/centerFactor), pair[1]+(size/centerFactor))
+		seedAlive(pair[0]+(height/centerFactor), pair[1]+(width/centerFactor))
 	}
 }
 

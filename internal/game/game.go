@@ -4,12 +4,13 @@ import (
 	"time"
 
 	"github.com/davidwmartines/life/internal/grid"
+	"github.com/davidwmartines/life/internal/seeds"
 	tb "github.com/nsf/termbox-go"
 )
 
 const cellRune = ' '
 
-const speed = 100 * time.Millisecond
+const speed = 20 * time.Millisecond
 
 const size = 100
 const centerFactor = 4
@@ -21,7 +22,7 @@ var cells map[*grid.Point]*cell
 var gr grid.Grid
 
 // Start starts a game.
-func Start(seed [][]int, generations int) {
+func Start(seed seeds.Seed, generations int) {
 
 	err := tb.Init()
 	if err != nil {
@@ -53,7 +54,7 @@ func initGrid() {
 	}
 }
 
-func applySeed(seed [][]int) {
+func applySeed(seed seeds.Seed) {
 	for _, pair := range seed {
 		seedAlive(pair[0]+(size/centerFactor), pair[1]+(size/centerFactor))
 	}

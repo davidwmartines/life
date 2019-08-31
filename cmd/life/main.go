@@ -6,5 +6,6 @@ import (
 )
 
 func main() {
-	game.Start(seeds.Acorn, 200)
+
+	game.Start(seeds.RPentomino, 1500)
 }

@@ -1,7 +1,9 @@
 package seeds
 
+type Seed [][]int
+
 /* Still lifes */
-var Beehive = [][]int{
+var Beehive = Seed{
 	{2, 3},
 	{2, 4},
 	{3, 2},
@@ -10,7 +12,7 @@ var Beehive = [][]int{
 	{4, 4},
 }
 
-var Block = [][]int{
+var Block = Seed{
 	{2, 3},
 	{2, 4},
 	{3, 3},
@@ -18,14 +20,14 @@ var Block = [][]int{
 }
 
 /* Oscliators */
-var Blinker = [][]int{
+var Blinker = Seed{
 	{4, 4},
 	{4, 5},
 	{4, 6},
 }
 
 /* Spaceships */
-var Glider = [][]int{
+var Glider = Seed{
 	{2, 5},
 	{3, 6},
 	{4, 4},
@@ -34,7 +36,7 @@ var Glider = [][]int{
 }
 
 /* Methuselahs */
-var RPentomino = [][]int{
+var RPentomino = Seed{
 	{2, 3},
 	{2, 4},
 	{3, 2},
@@ -42,7 +44,7 @@ var RPentomino = [][]int{
 	{4, 3},
 }
 
-var Acorn = [][]int{
+var Acorn = Seed{
 	{2, 3},
 	{3, 5},
 	{4, 2},
@@ -52,7 +54,7 @@ var Acorn = [][]int{
 	{4, 8},
 }
 
-var DieHard = [][]int{
+var DieHard = Seed{
 	{2, 8},
 	{3, 2},
 	{3, 3},

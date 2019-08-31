@@ -10,19 +10,16 @@ import (
 
 const cellRune = ' '
 
-const speed = 20 * time.Millisecond
-
 const size = 100
 const centerFactor = 4
 
-const aliveColor = tb.ColorGreen
 const backgroundColor = tb.ColorBlack
 
 var cells map[*grid.Point]*cell
 var gr grid.Grid
 
 // Start starts a game.
-func Start(seed seeds.Seed, generations int) {
+func Start(seed seeds.Seed, generations int, speed int, color tb.Attribute) {
 
 	err := tb.Init()
 	if err != nil {
@@ -34,12 +31,12 @@ func Start(seed seeds.Seed, generations int) {
 
 	applySeed(seed)
 
-	render()
+	render(color)
 
 	for i := 0; i < generations; i++ {
 		tick()
-		render()
-		time.Sleep(speed)
+		render(color)
+		time.Sleep(time.Duration(speed) * time.Millisecond)
 	}
 }
 
@@ -66,7 +63,7 @@ func seedAlive(row, col int) {
 	cell.nextState = true
 }
 
-func render() {
+func render(aliveColor tb.Attribute) {
 
 	tb.Clear(backgroundColor, backgroundColor)
 

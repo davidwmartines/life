@@ -2,6 +2,25 @@ package seeds
 
 type Seed [][]int
 
+// New creates a known Seed by name.
+func New(seedName string) (seed Seed) {
+	switch seedName {
+	case "acorn":
+		seed = Acorn
+	case "blinker":
+		seed = Blinker
+	case "diehard":
+		seed = DieHard
+	case "glider":
+		seed = Glider
+	case "rpentomino":
+		seed = RPentomino
+	default:
+		panic("unknown seed")
+	}
+	return
+}
+
 /* Still lifes */
 var Beehive = Seed{
 	{2, 3},

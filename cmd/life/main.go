@@ -3,8 +3,6 @@ package main
 import (
 	"flag"
 
-	"github.com/nsf/termbox-go"
-
 	"github.com/davidwmartines/life/internal/game"
 	"github.com/davidwmartines/life/internal/seeds"
 )
@@ -18,31 +16,6 @@ func main() {
 	flag.Parse()
 
 	seed := seeds.New(*seedName)
-	color := parseColor(*colorName)
 
-	game.Start(seed, *generations, *speed, color)
-}
-
-func parseColor(colorName string) (color termbox.Attribute) {
-	switch colorName {
-	case "green":
-		color = termbox.ColorGreen
-	case "blue":
-		color = termbox.ColorBlue
-	case "red":
-		color = termbox.ColorRed
-	case "cyan":
-		color = termbox.ColorCyan
-	case "magenta":
-		color = termbox.ColorMagenta
-	case "yellow":
-		color = termbox.ColorYellow
-	case "white":
-		color = termbox.ColorWhite
-	case "black":
-		color = termbox.ColorBlack
-	default:
-		panic("invalid color")
-	}
-	return
+	game.Start(seed, *generations, *speed, *colorName)
 }

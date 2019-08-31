@@ -1,4 +1,4 @@
-package game
+package seeds
 
 var Beehive = [][]int{
 	{2, 3},

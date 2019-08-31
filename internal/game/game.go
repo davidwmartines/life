@@ -7,7 +7,9 @@ import (
 	tb "github.com/nsf/termbox-go"
 )
 
-const speed = 300 * time.Millisecond
+const speed = 100 * time.Millisecond
+
+const aliveColor = tb.ColorYellow
 
 var cells map[*grid.Point]*cell
 var gr grid.Grid
@@ -64,7 +66,7 @@ func render() {
 			cell := cells[point]
 			var color tb.Attribute
 			if cell.alive {
-				color = tb.ColorGreen
+				color = aliveColor
 			} else {
 				color = tb.ColorDefault
 			}

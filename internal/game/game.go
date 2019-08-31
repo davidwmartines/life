@@ -7,9 +7,15 @@ import (
 	tb "github.com/nsf/termbox-go"
 )
 
+const cellRune = ' '
+
 const speed = 100 * time.Millisecond
 
+const size = 100
+const centerFactor = 4
+
 const aliveColor = tb.ColorGreen
+const backgroundColor = tb.ColorBlack
 
 var cells map[*grid.Point]*cell
 var gr grid.Grid
@@ -28,15 +34,17 @@ func Start(seed [][]int, generations int) {
 	applySeed(seed)
 
 	render()
+
 	for i := 0; i < generations; i++ {
 		tick()
 		render()
+		time.Sleep(speed)
 	}
 }
 
 func initGrid() {
 	cells = make(map[*grid.Point]*cell)
-	gr = grid.Create(100, 100)
+	gr = grid.Create(size, size)
 	for _, row := range gr {
 		for _, point := range row {
 			cell := cell{point, false, false}
@@ -47,7 +55,7 @@ func initGrid() {
 
 func applySeed(seed [][]int) {
 	for _, pair := range seed {
-		seedAlive(pair[0], pair[1])
+		seedAlive(pair[0]+(size/centerFactor), pair[1]+(size/centerFactor))
 	}
 }
 
@@ -59,7 +67,7 @@ func seedAlive(row, col int) {
 
 func render() {
 
-	tb.Clear(tb.ColorDefault, tb.ColorDefault)
+	tb.Clear(backgroundColor, backgroundColor)
 
 	for _, row := range gr {
 		for _, point := range row {
@@ -68,9 +76,9 @@ func render() {
 			if cell.alive {
 				color = aliveColor
 			} else {
-				color = tb.ColorDefault
+				color = backgroundColor
 			}
-			tb.SetCell(cell.point.Col, cell.point.Row, ' ', color, color)
+			tb.SetCell(cell.point.Col, cell.point.Row, cellRune, color, color)
 		}
 	}
 
@@ -100,6 +108,4 @@ func tick() {
 	for _, cell := range cells {
 		cell.alive = cell.nextState
 	}
-
-	time.Sleep(speed)
 }

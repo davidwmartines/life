@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-	game.Start(seeds.DieHard, 130)
+	game.Start(seeds.Acorn, 200)
 }

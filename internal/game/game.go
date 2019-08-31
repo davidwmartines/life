@@ -13,7 +13,7 @@ var cells map[*grid.Point]*cell
 var gr grid.Grid
 
 // Start starts a game.
-func Start(seed [][]int) {
+func Start(seed [][]int, generations int) {
 
 	err := tb.Init()
 	if err != nil {
@@ -26,7 +26,7 @@ func Start(seed [][]int) {
 	applySeed(seed)
 
 	render()
-	for {
+	for i := 0; i < generations; i++ {
 		tick()
 		render()
 	}
@@ -37,28 +37,22 @@ func initGrid() {
 	gr = grid.Create(100, 100)
 	for _, row := range gr {
 		for _, point := range row {
-			cell := cell{point, false}
+			cell := cell{point, false, false}
 			cells[point] = &cell
 		}
 	}
 }
 
 func applySeed(seed [][]int) {
-
 	for _, pair := range seed {
 		seedAlive(pair[0], pair[1])
 	}
-	// seedAlive(2, 3)
-	// seedAlive(2, 4)
-	// seedAlive(3, 2)
-	// seedAlive(3, 5)
-	// seedAlive(4, 3)
-	// seedAlive(4, 4)
-
 }
 
 func seedAlive(row, col int) {
-	cells[gr[row][col]].alive = true
+	cell := cells[gr[row][col]]
+	cell.alive = true
+	cell.nextState = true
 }
 
 func render() {
@@ -92,13 +86,18 @@ func tick() {
 		}
 		if cell.alive {
 			if aliveNeighbors < 2 || aliveNeighbors > 3 {
-				cell.alive = false
+				cell.nextState = false
 			}
 		} else {
 			if aliveNeighbors == 3 {
-				cell.alive = true
+				cell.nextState = true
 			}
 		}
 	}
+
+	for _, cell := range cells {
+		cell.alive = cell.nextState
+	}
+
 	time.Sleep(speed)
 }

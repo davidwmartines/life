@@ -8,7 +8,9 @@ import (
 	tb "github.com/nsf/termbox-go"
 )
 
-const cellRune = ' '
+var runes = []rune{
+	'█', '◆', '✦', '★', '✱', '✚', '·',
+}
 
 const backgroundColor = tb.ColorBlack
 const centerFactor = 3
@@ -33,11 +35,14 @@ func Start(seed seeds.Seed, generations int, speed int, color tb.Attribute) {
 
 	applySeed(seed)
 
-	render(color)
+	//maybe make this a flag
+	cellRune := runes[0]
+
+	render(color, cellRune)
 
 	for i := 0; i < generations; i++ {
 		tick()
-		render(color)
+		render(color, cellRune)
 		time.Sleep(time.Duration(speed) * time.Millisecond)
 	}
 }
@@ -66,7 +71,7 @@ func seedAlive(row, col int) {
 	cell.nextState = true
 }
 
-func render(aliveColor tb.Attribute) {
+func render(aliveColor tb.Attribute, cellRune rune) {
 
 	tb.Clear(backgroundColor, backgroundColor)
 
@@ -79,7 +84,7 @@ func render(aliveColor tb.Attribute) {
 			} else {
 				color = backgroundColor
 			}
-			tb.SetCell(cell.point.Col, cell.point.Row, cellRune, color, color)
+			tb.SetCell(cell.point.Col, cell.point.Row, cellRune, color, backgroundColor)
 		}
 	}
 

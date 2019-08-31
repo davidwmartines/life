@@ -9,7 +9,7 @@ import (
 
 const speed = 100 * time.Millisecond
 
-const aliveColor = tb.ColorYellow
+const aliveColor = tb.ColorGreen
 
 var cells map[*grid.Point]*cell
 var gr grid.Grid

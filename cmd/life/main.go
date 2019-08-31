@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-	game.Start(seeds.Blinker, 20)
+	game.Start(seeds.DieHard, 130)
 }

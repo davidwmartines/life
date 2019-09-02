@@ -1,6 +1,7 @@
 package game
 
 import (
+	"github.com/davidwmartines/life/pkg/model"
 	tb "github.com/nsf/termbox-go"
 )
 
@@ -38,20 +39,20 @@ func (view *view) close() {
 	tb.Close()
 }
 
-func (view *view) render(model *model) {
+func (view *view) render(model *model.Model) {
 
 	tb.Clear(backgroundColor, backgroundColor)
 
-	for _, row := range model.grid {
+	for _, row := range model.Grid {
 		for _, point := range row {
-			cell := model.cells[point]
+			cell := model.Cells[point]
 			var color tb.Attribute
-			if cell.alive {
+			if cell.Alive {
 				color = view.aliveColor
 			} else {
 				color = backgroundColor
 			}
-			tb.SetCell(cell.point.Col, cell.point.Row, view.cellRune, color, backgroundColor)
+			tb.SetCell(cell.Point.Col, cell.Point.Row, view.cellRune, color, backgroundColor)
 		}
 	}
 

@@ -1,9 +1,9 @@
 package seeds
 
-type Seed [][]int
+import "github.com/davidwmartines/life/pkg/model"
 
 // New creates a known Seed by name.
-func New(seedName string) (seed Seed) {
+func New(seedName string) (seed model.Seed) {
 	switch seedName {
 	case "acorn":
 		seed = Acorn
@@ -22,7 +22,8 @@ func New(seedName string) (seed Seed) {
 }
 
 /* Still lifes */
-var Beehive = Seed{
+
+var Beehive = model.Seed{
 	{2, 3},
 	{2, 4},
 	{3, 2},
@@ -31,7 +32,7 @@ var Beehive = Seed{
 	{4, 4},
 }
 
-var Block = Seed{
+var Block = model.Seed{
 	{2, 3},
 	{2, 4},
 	{3, 3},
@@ -39,14 +40,16 @@ var Block = Seed{
 }
 
 /* Oscliators */
-var Blinker = Seed{
+
+var Blinker = model.Seed{
 	{4, 4},
 	{4, 5},
 	{4, 6},
 }
 
 /* Spaceships */
-var Glider = Seed{
+
+var Glider = model.Seed{
 	{2, 5},
 	{3, 6},
 	{4, 4},
@@ -55,7 +58,8 @@ var Glider = Seed{
 }
 
 /* Methuselahs */
-var RPentomino = Seed{
+
+var RPentomino = model.Seed{
 	{2, 3},
 	{2, 4},
 	{3, 2},
@@ -63,7 +67,7 @@ var RPentomino = Seed{
 	{4, 3},
 }
 
-var Acorn = Seed{
+var Acorn = model.Seed{
 	{2, 3},
 	{3, 5},
 	{4, 2},
@@ -73,7 +77,7 @@ var Acorn = Seed{
 	{4, 8},
 }
 
-var DieHard = Seed{
+var DieHard = model.Seed{
 	{2, 8},
 	{3, 2},
 	{3, 3},

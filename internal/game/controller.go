@@ -3,22 +3,22 @@ package game
 import (
 	"time"
 
-	"github.com/davidwmartines/life/internal/seeds"
+	"github.com/davidwmartines/life/pkg/model"
 )
 
 // Start starts a game.
-func Start(seed seeds.Seed, generations int, speed int, color string) {
+func Start(seed model.Seed, generations int, speed int, color string) {
 
 	view := newView(color)
 	defer view.close()
 
-	model := newModel(view.height, view.width)
-	model.applySeed(seed)
+	model := model.Create(view.height, view.width)
+	model.ApplySeed(seed)
 
 	view.render(model)
 
 	for i := 0; i < generations; i++ {
-		model.tick()
+		model.Tick()
 		view.render(model)
 		time.Sleep(time.Duration(speed) * time.Millisecond)
 	}
